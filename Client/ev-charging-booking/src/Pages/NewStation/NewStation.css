@@ -1,0 +1,128 @@
+/* .new-station-register {
+  margin: 1rem;
+} */
+/* Toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  top: 7px;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50; /* green when active */
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+/* description and image */
+.new-station-description {
+  background-color: #03081d;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.new-station-description .para-desc {
+  color: #fff;
+  padding: 1rem;
+}
+.new-station-description .para-desc p {
+  padding: 1rem;
+}
+.new-station-description .img-desc img {
+  width: 100%;
+  object-fit: cover;
+  margin: 2% auto;
+  border-radius: 10px;
+}
+.para-desc h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+/* form */
+.station-form {
+  background-color: #03081d;
+  width: 100%;
+  padding: 20px;
+  color: #fff;
+}
+.station-form h1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+}
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-input-container input,
+textarea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #4a4a49;
+  background-color: #03081d;
+  border-radius: 5px;
+  gap: 5px;
+}
+/* Responsive for tablets */
+@media (max-width: 992px) {
+  .para-desc h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .new-station-description {
+    flex-direction: column; /* stack items vertically */
+    text-align: center;
+  }
+
+  .para-desc h1 {
+    font-size: 1.8rem;
+  }
+
+  .para-desc p {
+    font-size: 0.95rem;
+  }
+
+  .station-form h1 {
+    font-size: 2rem;
+  }
+}

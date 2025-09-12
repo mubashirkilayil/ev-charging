@@ -28,6 +28,8 @@ router.post('/', async (req, res) => {
 router.post('/sign-up', async (req, res) => {
   try {
     const { email, password, confirmPassword } = req.body;
+    console.log(req.body);
+
     const findEmail = await User.findOne({ email });
     if (findEmail) {
       return res.status(400).json({
@@ -41,7 +43,9 @@ router.post('/sign-up', async (req, res) => {
         message: 'Password and confirmPassword are not same, take action!',
       });
     }
-    const hashedPassword = await bcrypt.hash(password, 2);
+    // const hashedPassword = await bcrypt.hash(password, 2);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await User.create({
       ...req.body,
       password: hashedPassword,
@@ -64,7 +68,10 @@ router.post('/login', async (req, res) => {
       });
     }
     const passwordCompare = await bcrypt.compare(password, loginUser.password);
+
     if (!passwordCompare) {
+      console.log(password, loginUser.password, passwordCompare);
+
       return res.status(400).json({
         success: false,
         message: 'Check password!',
@@ -88,6 +95,7 @@ router.post('/login', async (req, res) => {
       user: {
         name: loginUser.name,
       },
+      id: loginUser._id,
     });
   } catch (e) {
     return res.status(500).json({ message: e.message });
@@ -156,9 +164,13 @@ router.post('/reset-password', async (req, res) => {
 
     const updatedPassword = await User.updateOne(
       { email },
-      { confirmPassword: password },
-      { password: hashedPassword }
+      {
+        password: hashedPassword,
+        confirmPassword: password,
+      }
     );
+    console.log(updatedPassword);
+
     return res.status(200).json({
       success: true,
       message: 'Password updated successfully',
