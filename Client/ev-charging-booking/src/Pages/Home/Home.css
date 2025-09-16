@@ -4,3 +4,12 @@
   object-fit: cover;
   display: block;
 }
+.sub img {
+  height: 35vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.features {
+  padding-bottom: 4rem;
+}

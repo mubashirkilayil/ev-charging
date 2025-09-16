@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const StationCard = ({ station }) => {
   return (
-    <div className="border rounded p-4 shadow-md flex justify-between items-center">
+    <div className="border rounded p-4 shadow-md flex justify-between items-center mt-3">
       <div>
         <h2 className="text-lg font-bold">{station.name}</h2>
         <p className="text-gray-600">{station.address}</p>

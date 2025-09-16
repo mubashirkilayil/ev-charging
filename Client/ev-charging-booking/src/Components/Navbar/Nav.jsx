@@ -143,7 +143,16 @@ const Navbar = () => {
           >
             Login
           </button> */}
-          <Button text="Login" />
+          {/* <Button text="Login" />
+           */}
+          {user ? (
+            <>
+              <span className="text-green-400">Hello,{user.name}</span>
+              <Button text="Logout" onClick={onLogOut} />
+            </>
+          ) : (
+            <Button text="Login" onClick={onLogin} />
+          )}
         </div>
       )}
     </nav>

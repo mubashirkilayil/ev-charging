@@ -36,6 +36,11 @@ const Booking = () => {
         vehicleNumber,
         amount: 200,
       });
+      if (data.success && data.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error('Failed to create Stripe session.');
+      }
     } catch (e) {
       toast.error(e.message);
     }

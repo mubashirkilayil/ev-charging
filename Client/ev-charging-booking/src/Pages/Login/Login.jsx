@@ -69,6 +69,12 @@ const LogIn = () => {
                 }}
               />
             </div>
+            <h6
+              onClick={() => navigate('/forgot-password')}
+              className="text-xs text-blue-400 cursor-pointer hover:underline"
+            >
+              Forgot Password?
+            </h6>
             {/* <button onClick={onLogIn}>Log In</button> */}
             <Button
               onClick={onLogIn}

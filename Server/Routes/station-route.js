@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const { search, available } = req.query;
+    const { search, available, page = 1, limit = 6 } = req.query;
     const query = {};
     if (search) {
       query.name = { $regex: search, $options: 'i' };
@@ -13,17 +13,21 @@ router.get('/', async (req, res) => {
     if (available) {
       query.available = available === 'true';
     }
-    const stations = await Station.find(query);
-    // if (!stations.length) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: 'No stations found for your search.',
-    //   });
-    // }
+    const skip = (page - 1) * limit;
+    const stations = await Station.find(query)
+      .skip(skip)
+      .limit(parseInt(limit));
+    const total = await Station.countDocuments(query);
     console.log('Search term:', search);
     console.log('MongoDB Query:', query);
 
-    return res.status(200).json({ success: true, stations });
+    return res.status(200).json({
+      success: true,
+      stations,
+      total,
+      totalPages: Math.ceil(total / limit),
+      currentPage: parseInt(page),
+    });
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
@@ -44,7 +48,7 @@ router.get('/near', async (req, res) => {
             type: 'Point',
             coordinates: [parseFloat(lng), parseFloat(lat)],
           },
-          $maxDistance: parseFloat(distance) * 1000,
+          $maxDistance: parseFloat(distance) * 4000,
         },
       },
     });
